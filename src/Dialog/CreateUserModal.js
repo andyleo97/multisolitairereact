@@ -3,9 +3,32 @@ import {Modal, Button, Form, Col, Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 
 class CreateUserModal extends Component {
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = { description: '' };
     }
+
+    onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        fetch(this.props.formAction, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({description: this.state.description})
+        });
+
+        this.setState({description: ''});
+    }
+
     render() {
         const {onHide, show} = this.props;
         return (
@@ -22,7 +45,12 @@ class CreateUserModal extends Component {
                 <Form>
                     <Modal.Body>
                         <p>
-                            <Form.Group as={Row} controlId="exampleForm.ControlInput1">
+                            <Form.Group as={Row}
+                                        controlId="main-login"
+                                        action={this.props.action}
+                                        method={this.props.method}
+                                        onSubmit={this.onSubmit}
+                                        >
                                 <Form.Label column sm="2">
                                    First Name
                                 </Form.Label>
@@ -57,10 +85,10 @@ class CreateUserModal extends Component {
                             </Form.Group>
                             <Form.Group as={Row} controlId="formPlaintextPassword">
                                 <Form.Label column sm="2">
-                                    Password
+                                    Confirm Password
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control type="password" placeholder="Password" />
+                                    <Form.Control type="password" placeholder="Confirm Password" />
                                 </Col>
                             </Form.Group>
                         </p>

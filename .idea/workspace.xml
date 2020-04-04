@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aabd304b-6a31-42de-b20a-1272d124b9ff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppNavBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/CreateUserModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/LoginModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dialog/CreateUserModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialog/CreateUserModal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,33 +76,55 @@
       <workItem from="1585727336907" duration="2003000" />
       <workItem from="1585772085160" duration="23000" />
       <workItem from="1585772123673" duration="333000" />
-      <workItem from="1585777606889" duration="928000" />
+      <workItem from="1585777606889" duration="1519000" />
+      <workItem from="1585869834522" duration="3118000" />
     </task>
+    <task id="LOCAL-00001" summary="Setup NavBar and setup login and create user dialogues">
+      <created>1585784308367</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585784308367</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="Setup NavBar and setup login and create user dialogues" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setup NavBar and setup login and create user dialogues" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="660" y="144" key="CommitChangelistDialog2" timestamp="1585784307574">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="660" y="144" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585784307574" />
     <state x="774" y="294" key="FileChooserDialogImpl" timestamp="1585772127425">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="774" y="294" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585772127425" />
-    <state width="1362" height="143" key="GridCell.Tab.0.bottom" timestamp="1585772458303">
+    <state width="1362" height="143" key="GridCell.Tab.0.bottom" timestamp="1585882773423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1362" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585772458303" />
-    <state width="1362" height="143" key="GridCell.Tab.0.center" timestamp="1585772458302">
+    <state width="1362" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585882773423" />
+    <state width="1362" height="143" key="GridCell.Tab.0.center" timestamp="1585882773423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1362" height="143" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585772458302" />
-    <state width="1362" height="143" key="GridCell.Tab.0.left" timestamp="1585772458302">
+    <state width="1362" height="143" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585882773423" />
+    <state width="1362" height="143" key="GridCell.Tab.0.left" timestamp="1585882773423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1362" height="143" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585772458302" />
-    <state width="1362" height="143" key="GridCell.Tab.0.right" timestamp="1585772458303">
+    <state width="1362" height="143" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585882773423" />
+    <state width="1362" height="143" key="GridCell.Tab.0.right" timestamp="1585882773423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1362" height="143" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585772458303" />
+    <state width="1362" height="143" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585882773423" />
+    <state x="627" y="282" key="Vcs.Push.Dialog.v2" timestamp="1585784320100">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="627" y="282" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585784320100" />
   </component>
 </project>
