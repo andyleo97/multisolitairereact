@@ -18,9 +18,6 @@ class CreateUserModal extends Component {
     }
 
     onChange = e => {
-        console.log('this: ', this)
-        console.log("e.targe.name: ", e.target.name)
-        console.log("e.targe.value: ", e.target.value)
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -36,32 +33,7 @@ class CreateUserModal extends Component {
             password: this.state.password,
             confPassword: this.state.confPassword
         }
-
-
-        // POST request using fetch with error handling
-        var config = {
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-                'Access-Control-Allow-Methods': 'POST',
-                'Access-Control-Allow-Headers': ['Content-Type', 'Authorization']
-            }
-        };
-        // axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8080';
-        // axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'POST'
-        // axios.defaults.headers.post['Access-Control-Allow-Headers'] = ['Content-Type', 'Authorization']
-        axios.post(`http://localhost:8080/createuser`, {user}, config)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
-            // check for error response
-
-
-            .catch(error => {
-                this.setState({errorMessage: error});
-                console.error('There was an error!', error);
-            });
-
+        axios.post(`http://localhost:8080/createuser`, user)
     }
 
 
