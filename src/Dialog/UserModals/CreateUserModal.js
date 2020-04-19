@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Modal, Button, Form, Col, Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import './CreateUserModal.css';
 
 
 class CreateUserModal extends Component {
@@ -13,7 +14,14 @@ class CreateUserModal extends Component {
             lastName: '',
             email: '',
             password: '',
-            confPassword: ''
+            confPassword: '',
+            buttonDisabled: true,
+            errors: {
+                firstNameCheck: false,
+                lastNameCheck: false,
+                emailCheck: false,
+                passwordCheck: false
+            }
         };
     }
 
@@ -21,20 +29,34 @@ class CreateUserModal extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-    }
+        this.setState(this.validate());
+    };
+
+    validate = () => {
+        // true means invalid, so our conditions got reversed
+        return { errors: {
+                firstNameCheck: this.state.firstName.length === 0,
+                lastNameCheck: this.state.lastName.length === 0,
+                emailCheck: this.state.email.length === 0,
+                passwordCheck: this.state.password === this.state.confPassword,
+            }
+        };
+    };
 
     onSubmit = e => {
-        e.preventDefault()
-
+        e.preventDefault();
         const user = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
             confPassword: this.state.confPassword
-        }
+        };
+
+
+
         axios.post(`http://localhost:8080/createuser`, user)
-    }
+    };
 
 
     render() {
@@ -54,14 +76,13 @@ class CreateUserModal extends Component {
                     <Modal.Body>
                         <p>
                             <Form.Group as={Row}
-                                        controlId="main-login"
-                            >
+                                        controlId="main-login">
                                 <Form.Label column sm="2">
                                     First Name
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control placeholder="First Name" name="firstName" value={this.state.firstName}
-                                                  onChange={this.onChange}/>
+                                    <Form.Control className={this.state.errors.firstNameCheck ? "error" : ""} placeholder="First Name" name="firstName" value={this.state.firstName}
+                                                    onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="exampleForm.ControlInput1">
@@ -69,7 +90,7 @@ class CreateUserModal extends Component {
                                     Last Name
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control placeholder="Last Name" name="lastName" value={this.state.lastName}
+                                    <Form.Control className={this.state.errors.lastNameCheck ? "error" : ""} placeholder="Last Name" name="lastName" value={this.state.lastName}
                                                   onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
@@ -78,7 +99,7 @@ class CreateUserModal extends Component {
                                     Email
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control placeholder="email@example.com" name="email" value={this.state.email}
+                                    <Form.Control className={this.state.errors.emailCheck ? "error" : ""} placeholder="email@example.com" name="email" value={this.state.email}
                                                   onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
@@ -88,7 +109,7 @@ class CreateUserModal extends Component {
                                     Password
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control type="password" placeholder="Password" name="password"
+                                    <Form.Control className={this.state.errors.passwordCheck ? "error" : ""} type="password" placeholder="Password" name="password"
                                                   value={this.state.password} onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
@@ -97,14 +118,14 @@ class CreateUserModal extends Component {
                                     Confirm Password
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control type="password" placeholder="Confirm Password" name="confPassword"
+                                    <Form.Control className={this.state.errors.passwordCheck ? "error" : ""} type="password" placeholder="Confirm Password" name="confPassword"
                                                   value={this.state.confPassword} onChange={this.onChange}/>
                                 </Col>
                             </Form.Group>
                         </p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={this.onSubmit}>
+                        <Button variant="primary" onClick={this.onSubmit} disabled={this.state.buttonDisabled}>
                             Submit
                         </Button>
                         <Button onClick={onHide}>Close</Button>

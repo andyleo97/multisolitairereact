@@ -2,8 +2,8 @@ import React,{ Component } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'
-import  LoginModal from './Dialog/LoginModal'
-import CreateUserModal from "./Dialog/CreateUserModal";
+import  LoginModal from './Dialog/UserModals/LoginModal'
+import CreateUserModal from "./Dialog/UserModals/CreateUserModal";
 
 const AppNavBar = () => {
 
