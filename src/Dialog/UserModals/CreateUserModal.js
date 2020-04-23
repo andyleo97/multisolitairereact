@@ -3,7 +3,7 @@ import { Form, Col, Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './CreateUserModal.css';
-import { Dialog, DialogActions, DialogTitle, DialogContent, TextField, Button} from "@material-ui/core";
+import { Dialog, DialogActions, DialogTitle, DialogContent, TextField, Button, Typography} from "@material-ui/core";
 
 class CreateUserModal extends Component {
     constructor(props, context) {
@@ -29,7 +29,6 @@ class CreateUserModal extends Component {
             [e.target.name]: e.target.value
         });
         this.setState(this.validate());
-        console.log(this.state.errors.firstNameCheck)
     };
 
     validate = () => {
@@ -39,7 +38,7 @@ class CreateUserModal extends Component {
                 firstNameCheck: this.state.firstName.length === 0,
                 lastNameCheck: this.state.lastName.length === 0,
                 emailCheck: !(expression.test(String(this.state.email).toLowerCase())),
-                passwordCheck: !(this.state.password === this.state.confPassword),
+                passwordCheck: !((this.state.password === this.state.confPassword) && (this.state.password.length !== 0 && this.state.confPassword.length !== 0)),
             }
             };
 
@@ -47,20 +46,18 @@ class CreateUserModal extends Component {
 
     isValid = () => {
         this.setState(this.validate());
-       return !this.state.errors.firstNameCheck && !this.state.errors.lastNameCheck && this.state.errors.emailCheck && this.state.errors.passwordCheck
+       return (!this.state.errors.firstNameCheck) && (!this.state.errors.lastNameCheck) && (!this.state.errors.emailCheck) && (!this.state.errors.passwordCheck)
     };
 
     onSubmit = e => {
-        //WHYYYYYYYYYYY
         e.preventDefault();
         console.log(!this.isValid())
-        if (!this.isValid){
+        if (!this.isValid()){
             console.log("Validation Error");
 
-        }
-        else {
-            console.log(!this.state.errors.firstNameCheck && !this.state.errors.lastNameCheck && this.state.errors.emailCheck && this.state.errors.passwordCheck)
-            console.log(this.state.errors);
+        } else {
+            //console.log(!this.state.errors.firstNameCheck && !this.state.errors.lastNameCheck && this.state.errors.emailCheck && this.state.errors.passwordCheck)
+            console.log(this.state);
             const user = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -69,7 +66,14 @@ class CreateUserModal extends Component {
                 confPassword: this.state.confPassword
             };
 
-            axios.post(`http://localhost:8080/createuser`, user);
+            axios.post(`http://localhost:8080/createuser`, user).then((response) => {
+                const newResponse = {
+                    response
+                };
+                this.setState(newResponse);
+            }, (error) => {
+                console.log(error);
+            });
         }
 
 
@@ -104,7 +108,7 @@ class CreateUserModal extends Component {
                                            onChange={this.onChange}/>
                         </Row>
                         <Row>
-                                <TextField error={this.state.errors.passwordCheck} required type="Password" label="Confirm Password" name="confPassword"
+                                <TextField  id="filled-error-helper-text" error={this.state.errors.passwordCheck} required helperText={this.state.errors.passwordCheck ? "Passwords Don't Match or Is Empty" : ""} type="Password" label="Confirm Password" name="confPassword"
                                            onChange={this.onChange}/>
                         </Row>
                     </form>
