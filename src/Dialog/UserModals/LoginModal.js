@@ -3,9 +3,6 @@ import {Modal, Button, Form, Col, Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 
 class LoginModal extends Component {
-    constructor(props) {
-        super(props)
-    }
     render() {
         const {onHide, show} = this.props;
         return (
@@ -59,7 +56,7 @@ class LoginModal extends Component {
 
 LoginModal.propTypes = {
     onHide: PropTypes.func,
-    show: PropTypes.func
+    show: PropTypes.bool
 };
 
 export default LoginModal;
