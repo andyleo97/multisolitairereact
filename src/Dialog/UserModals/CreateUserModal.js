@@ -24,13 +24,6 @@ class CreateUserModal extends Component {
         };
     }
 
-
-    onChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value, errors: this.validate(e.target.name, e.target.value)
-        });
-    };
-
     validateFirstName = e => {
         const val = e.target.value || ''
         this.setState({firstName: val, firstNameCheck: val.length === 0 ? 'Cannot be empty' : ''})
@@ -72,6 +65,7 @@ class CreateUserModal extends Component {
         } = this.state;
         return (!firstNameCheck) && (!lastNameCheck) && (!emailCheck) && (!passwordCheck) && firstName &&
             lastName && email && password && confPassword
+
     };
 
     onSubmit = e => {
@@ -92,11 +86,33 @@ class CreateUserModal extends Component {
         }, (error) => {
             console.log(error);
         });
+        // add response to Redux
+        this.hideDialog()
     };
+
+    clearState = () => {
+        this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confPassword: '',
+            firstNameCheck: false,
+            lastNameCheck: false,
+            emailCheck: false,
+            passwordCheck: false
+        })
+    }
+
+    hideDialog = () => {
+        const { onHide } = this.props
+        this.clearState()
+        onHide()
+    }
 
 
     render() {
-        const {onHide, show} = this.props;
+        const {show} = this.props;
         const {firstNameCheck, lastNameCheck, emailCheck, passwordCheck} = this.state;
         return (
             <Dialog
@@ -139,7 +155,7 @@ class CreateUserModal extends Component {
                     <Button disabled={!this.isValid()} variant="contained" color="primary" onClick={this.onSubmit}>
                         Submit
                     </Button>
-                    <Button variant="contained" color="secondary" onClick={onHide}>Close</Button>
+                    <Button variant="contained" color="secondary" onClick={this.hideDialog}>Close</Button>
                 </DialogActions>
             </Dialog>
         );

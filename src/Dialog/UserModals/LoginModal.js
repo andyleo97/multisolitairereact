@@ -1,55 +1,125 @@
 import React, {Component} from 'react'
-import {Modal, Button, Form, Col, Row} from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import PropTypes from 'prop-types';
+import {Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button} from "@material-ui/core";
+import axios from "axios";
 
 class LoginModal extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            email: '',
+            password: '',
+            emailCheck: false,
+            passwordCheck: false
+        };
+    }
+
+    validatePassword = e => {
+        const {password} = this.state
+        const cleanPassword = (e.target.name === 'password' ? e.target.value : password) || ''
+        let errorMessage = (cleanPassword.length < 0) ? 'You must enter a password '  : ''
+        this.setState({
+            password: cleanPassword,
+            passwordCheck: errorMessage,
+        })
+    }
+
+    validateEmail = e => {
+        const val = e.target.value || ''
+        // eslint-disable-next-line no-useless-escape
+        const expression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        this.setState({
+            email: val,
+            emailCheck: !(expression.test(String(val).toLowerCase())) ? 'Invalid email format' : ''
+        })
+    }
+
+    hideDialog = () => {
+        const { onHide } = this.props
+        this.clearState()
+        onHide()
+    }
+
+    isValid = () => {
+        const {
+            emailCheck, passwordCheck, email, password
+        } = this.state;
+        return (!emailCheck) && (!passwordCheck) && email && password
+
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+        };
+
+        axios.post(`http://localhost:8080/login`, user).then((response) => {
+            const newResponse = {
+                response
+            };
+            this.setState(newResponse);
+        }, (error) => {
+            console.log(error);
+        });
+        // add response to Redux
+        this.hideDialog()
+    };
+
+    clearState = () => {
+        this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confPassword: '',
+            firstNameCheck: false,
+            lastNameCheck: false,
+            emailCheck: false,
+            passwordCheck: false
+        })
+    }
+
+
+
+
     render() {
-        const {onHide, show} = this.props;
+        const { emailCheck, passwordCheck} = this.state;
+        const { show } = this.props;
         return (
-            <Modal
-                show={show}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Header closeButton onClick={onHide}>
-                    <Modal.Title id="contained-modal-title-vcenter">
+            <Dialog
+                maxWidth="xs"
+                fullWidth
+                open={show}
+                aria-labelledby="contained-modal-title-vcenter">
+                <DialogTitle id="form-dialog-title">Login</DialogTitle>
+                <DialogContent>
+                    <form autoComplete="off">
+                        <Row>
+                            <TextField error={!!emailCheck} helperText={emailCheck} required label="Email"
+                                       placeholder="email@example.com"
+                                       name="email"
+                                       fullWidth
+                                       onChange={this.validateEmail}/>
+                        </Row>
+                        <Row>
+                            <TextField error={!!passwordCheck} required type="Password" label="Password" name="password"
+                                       onChange={this.validatePassword} fullWidth/>
+                        </Row>
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button disabled={!this.isValid()} variant="contained" color="primary" onClick={this.onSubmit}>
                         Login
-                    </Modal.Title>
-                </Modal.Header>
-                <Form>
-                <Modal.Body>
-
-                    <p>
-
-                            <Form.Group as={Row} controlId="exampleForm.ControlInput1">
-                                <Form.Label column sm="2">
-                                    Email
-                                </Form.Label>
-                                <Col sm="10">
-                                    <Form.Control placeholder="email@example.com" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row} controlId="formPlaintextPassword">
-                                <Form.Label column sm="2">
-                                    Password
-                                </Form.Label>
-                                <Col sm="10">
-                                    <Form.Control type="password" placeholder="Password" />
-                                </Col>
-                            </Form.Group>
-
-
-                    </p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" type="submit">
-                        Submit
                     </Button>
-                    <Button onClick={onHide}>Close</Button>
-                </Modal.Footer>
-                </Form>
-            </Modal>
+                    <Button variant="contained" color="secondary" onClick={this.hideDialog}>Close</Button>
+                </DialogActions>
+            </Dialog>
         );
     }
 }
