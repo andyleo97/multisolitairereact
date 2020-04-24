@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="aabd304b-6a31-42de-b20a-1272d124b9ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppNavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppNavBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dialog/UserModals/CreateUserModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialog/UserModals/CreateUserModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dialog/UserModals/LoginModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialog/UserModals/LoginModal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,20 +28,23 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -93,6 +99,7 @@
       <workItem from="1586480865814" duration="1640000" />
       <workItem from="1587329147739" duration="11597000" />
       <workItem from="1587411694433" duration="7716000" />
+      <workItem from="1587681781391" duration="9130000" />
     </task>
     <task id="LOCAL-00001" summary="Setup NavBar and setup login and create user dialogues">
       <created>1585784308367</created>
@@ -126,7 +133,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -138,6 +145,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="issues with validation and added react material" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="701" y="454" key="#ESLint" timestamp="1587687918653">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="701" y="454" key="#ESLint/0.23.1680.1027@0.23.1680.1027" timestamp="1587687918653" />
     <state x="660" y="121" key="CommitChangelistDialog2" timestamp="1587679245300">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -187,10 +198,11 @@
     <state x="627" y="282" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/-1360.-189.1360.728@0.0.1920.1040" timestamp="1587413073254" />
     <state x="627" y="282" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585784320100" />
     <state x="627" y="282" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/-1360.-189.1360.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586182319559" />
-    <state x="656" y="118" width="607" height="804" key="find.popup" timestamp="1587343695890">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="574" y="140" width="570" height="794" key="find.popup" timestamp="1587689579760">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="656" y="118" width="607" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040/-1360.-189.1360.728@0.0.1920.1040" timestamp="1587343695890" />
+    <state x="574" y="140" width="570" height="794" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1587689579760" />
     <state x="623" y="225" key="search.everywhere.popup" timestamp="1587343640019">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
