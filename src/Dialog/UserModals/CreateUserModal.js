@@ -3,7 +3,7 @@ import {Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './CreateUserModal.css';
-import {Alert, AlertTitle} from "@material-ui/lab"
+import {Alert} from "@material-ui/lab"
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Snackbar} from "@material-ui/core";
 
 class CreateUserModal extends Component {
@@ -21,8 +21,7 @@ class CreateUserModal extends Component {
             firstNameCheck: false,
             lastNameCheck: false,
             emailCheck: false,
-            passwordCheck: false,
-            emailError : false
+            passwordCheck: false
         };
     }
 
@@ -81,12 +80,15 @@ class CreateUserModal extends Component {
         };
 
         axios.post(`http://localhost:8080/createuser`, user).then((response) => {
-            if (response.status !== 200){
-                this.setState({emailError : true})
+            if (response.status === 208){
+                this.setState({emailError : true, emailCheck : "Email already exists"})
                 this.openError()
             }
-            else {
+            if (response.status === 200){
                 this.hideDialog()
+            }
+            else {
+                console.log(response)
             }
         }, (error) => {
             console.log(error);
@@ -129,7 +131,7 @@ class CreateUserModal extends Component {
 
     render() {
         const {show} = this.props;
-        const {firstNameCheck, lastNameCheck, emailCheck, passwordCheck, emailError} = this.state;
+        const {firstNameCheck, lastNameCheck, emailCheck, passwordCheck} = this.state;
         return (
             <Dialog
                 maxWidth="xs"
@@ -150,7 +152,7 @@ class CreateUserModal extends Component {
                                        onChange={this.validateLastName}/>
                         </Row>
                         <Row>
-                            <TextField error={!!emailCheck || emailError} helperText={emailCheck} required label="Email"
+                            <TextField error={!!emailCheck} helperText={emailCheck} required label="Email"
                                        placeholder="email@example.com"
                                        name="email"
                                        onChange={this.validateEmail}/>

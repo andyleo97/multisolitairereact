@@ -11,7 +11,7 @@ const AppNavBar = () => {
     const [ createModalShow, setCreateModalShow ] = React.useState(false);
 
         return (<Navbar bg="primary" variant="dark">
-            <Navbar.Brand>MultiSolitare</Navbar.Brand>
+            <Navbar.Brand>Pounce</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
