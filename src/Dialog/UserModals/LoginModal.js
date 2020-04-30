@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { Row } from 'react-bootstrap'
-import PropTypes from 'prop-types';
-import {Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button} from "@material-ui/core";
+import PropTypes from 'prop-types'
+import {Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button} from "@material-ui/core"
+import {Alert, AlertTitle} from "@material-ui/lab"
 import axios from "axios";
 
 class LoginModal extends Component {
@@ -60,10 +61,9 @@ class LoginModal extends Component {
         };
 
         axios.post(`http://localhost:8080/login`, user).then((response) => {
-            const newResponse = {
-                response
-            };
+            const newResponse = { response };
             this.setState(newResponse);
+            console.log(response)
         }, (error) => {
             console.log(error);
         });
@@ -98,6 +98,10 @@ class LoginModal extends Component {
                 open={show}
                 aria-labelledby="contained-modal-title-vcenter">
                 <DialogTitle id="form-dialog-title">Login</DialogTitle>
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    This is an error alert — <strong>check it out!</strong>
+                </Alert>
                 <DialogContent>
                     <form autoComplete="off">
                         <Row>
@@ -106,6 +110,7 @@ class LoginModal extends Component {
                                        name="email"
                                        fullWidth
                                        onChange={this.validateEmail}/>
+
                         </Row>
                         <Row>
                             <TextField error={!!passwordCheck} required type="Password" label="Password" name="password"

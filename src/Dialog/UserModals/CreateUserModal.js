@@ -3,7 +3,8 @@ import {Row} from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './CreateUserModal.css';
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@material-ui/core";
+import {Alert, AlertTitle} from "@material-ui/lab"
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Snackbar} from "@material-ui/core";
 
 class CreateUserModal extends Component {
     MINIMUM_PASSWORD_LENGTH = 4
@@ -20,7 +21,8 @@ class CreateUserModal extends Component {
             firstNameCheck: false,
             lastNameCheck: false,
             emailCheck: false,
-            passwordCheck: false
+            passwordCheck: false,
+            emailError : false
         };
     }
 
@@ -79,16 +81,20 @@ class CreateUserModal extends Component {
         };
 
         axios.post(`http://localhost:8080/createuser`, user).then((response) => {
-            const newResponse = {
-                response
-            };
-            this.setState(newResponse);
+            if (response.status !== 200){
+                this.setState({emailError : true})
+                this.openError()
+            }
+            else {
+                this.hideDialog()
+            }
         }, (error) => {
             console.log(error);
         });
         // add response to Redux
-        this.hideDialog()
+
     };
+
 
     clearState = () => {
         this.setState({
@@ -100,7 +106,8 @@ class CreateUserModal extends Component {
             firstNameCheck: false,
             lastNameCheck: false,
             emailCheck: false,
-            passwordCheck: false
+            passwordCheck: false,
+            emailError : false
         })
     }
 
@@ -110,10 +117,19 @@ class CreateUserModal extends Component {
         onHide()
     }
 
+    openError = () => {
+        this.setState({openEmailError : true})
+    }
+
+    closeError = () => {
+        this.setState({openEmailError : false})
+    }
+
+
 
     render() {
         const {show} = this.props;
-        const {firstNameCheck, lastNameCheck, emailCheck, passwordCheck} = this.state;
+        const {firstNameCheck, lastNameCheck, emailCheck, passwordCheck, emailError} = this.state;
         return (
             <Dialog
                 maxWidth="xs"
@@ -134,11 +150,16 @@ class CreateUserModal extends Component {
                                        onChange={this.validateLastName}/>
                         </Row>
                         <Row>
-                            <TextField error={!!emailCheck} helperText={emailCheck} required label="Email"
+                            <TextField error={!!emailCheck || emailError} helperText={emailCheck} required label="Email"
                                        placeholder="email@example.com"
                                        name="email"
                                        onChange={this.validateEmail}/>
                         </Row>
+                        <Snackbar open={this.state.openEmailError} onClose={this.closeError}>
+                            <Alert onClose={this.closeError} variant="filled" severity="error">
+                                Email already exists
+                            </Alert>
+                        </Snackbar>
                         <Row>
                             <TextField error={!!passwordCheck} required type="Password" label="Password" name="password"
                                        onChange={this.validatePassword}/>
