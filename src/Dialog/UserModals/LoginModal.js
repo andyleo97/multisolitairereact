@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import {Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button} from "@material-ui/core"
-import {Alert, AlertTitle} from "@material-ui/lab"
+import {Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, Snackbar} from "@material-ui/core"
+import {Alert} from "@material-ui/lab"
 import axios from "axios";
 
 class LoginModal extends Component {
@@ -68,8 +68,16 @@ class LoginModal extends Component {
             console.log(error);
         });
         // add response to Redux
-        this.hideDialog()
+
     };
+
+    openError = () => {
+        this.setState({openEmailError : true})
+    }
+
+    closeError = () => {
+        this.setState({openEmailError : false})
+    }
 
     clearState = () => {
         this.setState({
@@ -98,10 +106,6 @@ class LoginModal extends Component {
                 open={show}
                 aria-labelledby="contained-modal-title-vcenter">
                 <DialogTitle id="form-dialog-title">Login</DialogTitle>
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    This is an error alert — <strong>check it out!</strong>
-                </Alert>
                 <DialogContent>
                     <form autoComplete="off">
                         <Row>
@@ -113,9 +117,14 @@ class LoginModal extends Component {
 
                         </Row>
                         <Row>
-                            <TextField error={!!passwordCheck} required type="Password" label="Password" name="password"
+                            <TextField error={!!passwordCheck} helperText={passwordCheck} required type="Password" label="Password" name="password"
                                        onChange={this.validatePassword} fullWidth/>
                         </Row>
+                        <Snackbar open={this.state.openEmailError} onClose={this.closeError}>
+                            <Alert onClose={this.closeError} variant="filled" severity="error">
+                                Email already exists
+                            </Alert>
+                        </Snackbar>
                     </form>
                 </DialogContent>
                 <DialogActions>
